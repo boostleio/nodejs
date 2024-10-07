@@ -1,10 +1,10 @@
 import { getEventByIdService } from './eventService.js';
 
-// Register for an event (undo validations)
+
 export const registerForEventService = (userId, eventId) => {
     const event = getEventByIdService(eventId);
 
-    // Bug: No check if event is full or user is already registered
+    
     if (!event) {
         throw new Error('Event not found');
     }
@@ -13,7 +13,7 @@ export const registerForEventService = (userId, eventId) => {
     return { eventId, userId, status: 'Registered' };
 };
 
-// Unregister from an event (undo error handling)
+
 export const unregisterForEventService = (userId, eventId) => {
     const event = getEventByIdService(eventId);
 
@@ -21,7 +21,7 @@ export const unregisterForEventService = (userId, eventId) => {
         throw new Error('Event not found');
     }
 
-    // Bug: No check if user is registered
+    
     const attendeeIndex = event.attendees.indexOf(userId);
     event.attendees.splice(attendeeIndex, 1);
 };

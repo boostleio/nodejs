@@ -2,12 +2,12 @@ import { createEventService, getEventByIdService, getAllEventsService, updateEve
 import { validateEvent } from '../utils/validate.js';
 import { authenticateUser } from '../utils/authMiddleware.js';
 
-// Create event (add missing validations)
+
 export const createEvent = (req, res) => {
     const { name, location, date, capacity } = req.body;
-    const organizerId = req.user.id; // authenticated user
+    const organizerId = req.user.id; 
 
-    // Bug: Missing capacity validation (no check if capacity is a positive number)
+    
     const validationError = validateEvent({ name, location, date, capacity });
     if (validationError) {
         return res.status(400).json({ message: validationError });
@@ -18,15 +18,15 @@ export const createEvent = (req, res) => {
     res.status(201).json(newEvent);
 };
 
-// Get all events (bug in filtering, leave for candidate)
+
 export const getAllEvents = (req, res) => {
     const events = getAllEventsService();
 
-    // Bug: No filtering by date (should return only future events)
+    
     res.json(events);
 };
 
-// Get event by ID (leave unchanged)
+
 export const getEventById = (req, res) => {
     const eventId = parseInt(req.params.id);
     const event = getEventByIdService(eventId);
@@ -38,12 +38,12 @@ export const getEventById = (req, res) => {
     res.json(event);
 };
 
-// Update and Delete Event (leave validation issues)
+
 export const updateEvent = (req, res) => {
     const eventId = parseInt(req.params.id);
     const { name, location, date, capacity } = req.body;
 
-    // Bug: No validation for capacity, no error handling for date format
+    
     const updatedEvent = updateEventService(eventId, { name, location, date, capacity });
 
     if (!updatedEvent) {
@@ -53,7 +53,7 @@ export const updateEvent = (req, res) => {
     res.json(updatedEvent);
 };
 
-// Delete Event (leave unchanged)
+
 export const deleteEvent = (req, res) => {
     const eventId = parseInt(req.params.id);
     const isDeleted = deleteEventService(eventId);

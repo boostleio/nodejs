@@ -7,7 +7,7 @@ import registrationRoutes from './src/routes/registrationRoutes.js';
 const app = express();
 app.use(bodyParser.json());
 
-// Define routes
+
 app.use('/users', userRoutes);
 app.use('/events', eventRoutes);
 app.use('/registrations', registrationRoutes);
